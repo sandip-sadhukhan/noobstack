@@ -1,0 +1,28 @@
+.question a {
+    color: rgba(255, 255, 255, 0.8);
+}
+.question {
+    font-size: 1rem;
+}
+
+#new-question textarea, #new-question input{
+    font-size: 1rem;
+}
+#question-div hr, #hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.buttons a{
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.buttons a:hover{
+    text-decoration: none !important;
+}
+
+.value {
+    font-size: 1.3rem;
+}

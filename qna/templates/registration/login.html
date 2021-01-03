@@ -1,0 +1,35 @@
+{% extends 'qna/base.html' %}
+{% block title %}Login | Noobstack{% endblock %}
+{% block content %}
+<section id="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 m-auto">
+                <h4 class="text-dark mb-3 text-center">Login</h4>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_username">Password</label>
+                        {{form.password}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <p class="lead mt-3">Don't have an account? <a href="{% url 'register' %}">Register Here!</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    const inputs = document.querySelectorAll('#login input');
+    inputs[1].placeholder = "Username";
+    inputs[1].classList += "form-control";
+    inputs[2].placeholder = "Password";
+    inputs[2].classList += "form-control";
+</script>
+{% endblock %}

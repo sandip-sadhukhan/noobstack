@@ -1,0 +1,50 @@
+{% extends 'qna/base.html' %}
+{% block title %}{{question.title}} | NoobStack{% endblock %}
+{% block content %}
+<section id="question-div">
+    <h4 class="mb-3 text-dark">{{question.title}}</h4>
+    <p class="text-muted">Asked by {{question.user.username}}</p>
+    <hr>
+    <p class="lead">{{question.description}}</p>
+    <div class="buttons">
+        <a href="{% url 'updateVote' %}?slug={{question.slug}}&voteType=up">
+            <i class="fa fa-2x fa-thumbs{% if user not in question.likedUsers.all  %}-o{%endif%}-up mr-2"></i>
+            <span class="value">{{question.point}}</span>
+        </a>
+        <a href="{% url 'updateVote' %}?slug={{question.slug}}&voteType=down">
+            <i class="fa fa-2x fa-thumbs{% if user not in question.disLikedUsers.all  %}-o{%endif%}-down ml-2"></i>
+        </a>
+    </div>
+    <div id="answers" class="my-3 mt-4">
+        <h5 class="text-dark">Answers</h5>
+        <hr>
+        {% for answer in question.answer_set.all|dictsortreversed:"point" %}
+        <p class="text-muted m-0">Answered by {{answer.user.username}}</p>
+        <p class="lead">{{answer.body}}</p>
+        <div class="buttons">
+            <a href="{% url 'updateVote' %}?slug={{question.slug}}&isAnswer=true&answerId={{answer.id}}&voteType=up">
+                <i class="fa fa-2x fa-thumbs{% if user not in answer.likedUsers.all %}-o{%endif%}-up mr-2"></i>
+                <span class="value">{{answer.point}}</span>
+            </a>
+            <a href="{% url 'updateVote' %}?slug={{question.slug}}&isAnswer=true&answerId={{answer.id}}&voteType=down">
+                <i class="fa fa-2x fa-thumbs{% if user not in answer.disLikedUsers.all %}-o{%endif%}-down ml-2"></i>
+            </a>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    <section id="write-answer">
+        {% if user.is_authenticated %}
+        <h5 class="text-dark">Write Answer</h5>
+        <form action="{% url 'question' question.slug %}" method="post">{% csrf_token %}
+            <div class="form-group">
+                <textarea name="answer" id="answer" cols="30" rows="5" class="form-control" placeholder="Write answer..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-info">Submit Answer</button>
+        </form>
+        {% else %}
+        <h6 class="text-dark lead">Please Login for Write Answers</h6>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

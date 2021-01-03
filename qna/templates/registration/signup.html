@@ -1,0 +1,70 @@
+{% extends 'qna/base.html' %}
+{% block title %}Signup | Noobstack{% endblock %}
+{% block content %}
+<section id="signup">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 m-auto">
+                <h4 class="text-dark mb-3 text-center">Signup</h4>
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                {{form.first_name}}
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="first_name">Last Name</label>
+                                {{form.last_name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Username</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Email</label>
+                        {{form.email}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="first_name">Password</label>
+                                {{form.password1}}
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="first_name">Confirm Password</label>
+                                {{form.password2}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Register</button>
+                    <p class="lead mt-3">Already have an account? <a href="{% url 'login' %}">Login Here!</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+    const inputs = document.querySelectorAll('#signup input');
+    // console.log(inputs);
+    inputs.forEach((inp) => {
+        inp.classList += 'form-control';
+    })
+    inputs[1].placeholder = 'First Name';
+    inputs[2].placeholder = 'Last Name';
+    inputs[3].placeholder = 'Username';
+    inputs[4].placeholder = 'Email Address';
+    inputs[5].placeholder = 'Password';
+    inputs[6].placeholder = 'Confirm Password';
+</script>
+{% endblock %}

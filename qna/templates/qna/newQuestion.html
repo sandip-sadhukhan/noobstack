@@ -1,0 +1,19 @@
+{% extends 'qna/base.html' %}
+{% block title %}Post Question | NoobStack{% endblock %}
+{% block content %}
+<section id="new-question">
+    <h5 class="mb-4 text-dark">Post Your Question</h3>
+    <form action="{% url 'newQuestion' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Question Title</label>
+            <input type="text" id="title" class="form-control" placeholder="Enter question title..." name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Question Description</label>
+            <textarea name="description" class="form-control value" id="description" cols="30" rows="5" placeholder="Enter question description..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-info">Post Question</button>
+    </form>
+</section>
+{% endblock %}
